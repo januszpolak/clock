@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Data i godzina</title>
+    <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(48, 46, 46);
+            max-height: 100vh;
+            overflow: hidden;
+            background-image: url('nat.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                background-image: url('coffee.jpg');
+            }
+        }
+
+        div {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border: 2px solid darkorange;
+            border-radius: 10px;
+            padding: 5vh 8vh;
+            margin: 0 auto;
+            font-size: 3rem;
+            font-family: 'Space Mono', monospace;
+            color: beige;
+            background-color: black;
+            box-shadow: 0px 0px 95px 15px rgba(0, 0, 0, 0.75);
+        }
+
+        .nameOfday {
+            top: 62%;
+            font-size: 1.5rem;
+            padding: 2vh 8vh;
+
+        }
+
+        .clock {
+
+            width: 20vh;
+            padding: 1vh 1vh;
+            text-align: center;
+            top: 40%;
+            font-size: 1.5rem;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="clock"></div>
+    <div class="date"></div>
+    <div class="nameOfday"></div>
+    <script>
+        let data = new Date();
+
+        let dzien = data.getDate();
+        if (dzien < 10) dzien = '0' + dzien;
+        let miesiac = data.getMonth() + 1;
+        let rok = data.getFullYear()
+        let fullDate = dzien + '/' + miesiac + '/' + rok;
+
+        let days = ['Niedziela', 'Poniedziałek', 'Wtorek', 'Środa', 'Czwartek', 'Piątek', 'Sobota'];
+        let dayName = days[data.getDay()];
+
+        document.querySelector('.nameOfday').innerHTML = dayName;
+        document.querySelector('.date').innerHTML = fullDate;
+
+        const clock = () => {
+            let time = new Date();
+            let seconds = time.getSeconds();
+            if (seconds < 10) seconds = '0' + seconds;
+            let minutes = time.getMinutes();
+            if (minutes < 10) minutes = '0' + minutes;
+            let hours = time.getHours();
+            document.querySelector('.clock').innerHTML = hours + ':' + minutes + ':' + seconds;
+        }
+        setInterval(clock, 1000);
+    </script>
+</body>
+
+</html>
